@@ -54,13 +54,17 @@ def receiver(channel: Channel) -> str:
     buffer_read_cooldown = 0
 
     def add_bit_to_buffer(bit: int) -> None:
+        global buffer_read_cooldown
+
         if len(buffer_queue) == buffer_size:
             buffer_queue.pop(0)
 
         buffer_queue.append(bit)
-        buffer_read_cooldown = buffer_read_cooldown + 1
+        buffer_read_cooldown += 1
 
     def read_buffer_identity(buffer_queue: list) -> int:
+        global buffer_read_cooldown
+
         if buffer_read_cooldown < buffer_size:
             return 0
 
