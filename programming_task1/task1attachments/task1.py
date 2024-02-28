@@ -52,15 +52,19 @@ def receiver(channel: Channel) -> str:
     buffer_size = 15
     buffer_queue = []  # Size: 10
     buffer_read_cooldown = 0
+    max_bits = 3000
+    raw_bits_read = 0
 
     def add_bit_to_buffer(bit: int) -> None:
         nonlocal buffer_read_cooldown
+        nonlocal raw_bits_read
 
         if len(buffer_queue) == buffer_size:
             buffer_queue.pop(0)
 
         buffer_queue.append(bit)
         buffer_read_cooldown += 1
+        raw_bits_read += 1
 
     def read_buffer_identity(buffer_queue: list) -> int:
         nonlocal buffer_read_cooldown
@@ -86,6 +90,9 @@ def receiver(channel: Channel) -> str:
     # Read the "bits" of the message.
     sentence = []
     while True:
+        if raw_bits_read > max_bits:
+            break
+
         curr_bit_string = ""
         for _ in range(16):
             # Fill the buffer queue with [buffer_size] bits.
