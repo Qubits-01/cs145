@@ -18,7 +18,7 @@ with open("corpus.txt", "r") as corpus_file:
 
 
 def sender(channel: Channel, sentence: str) -> None:
-    repetition_number = 10
+    repetition_number = 15
 
     def send_bit_n_times(bit: int, repetition_number: int) -> None:
         for _ in range(repetition_number):
@@ -49,7 +49,7 @@ def sender(channel: Channel, sentence: str) -> None:
 
 
 def receiver(channel: Channel) -> str:
-    buffer_size = 10
+    buffer_size = 15
     buffer_queue = []  # Size: 10
     buffer_read_cooldown = 0
 
