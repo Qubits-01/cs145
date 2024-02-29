@@ -52,9 +52,9 @@ def sender(channel: Channel, sentence: str) -> None:
 def receiver(channel: Channel) -> str:
     bit_flip_probability = 0.1  # 10% bit flip probability
     offset = 1
-    start_signal_repetition_number = 10
+    start_signal_repetition_number = 30
     start_signal_buffer_queue = []
-    message_repetition_number = 10
+    message_repetition_number = 20
     message_buffer_queue = []
     message_max_bits = 3500  # If the message end indicator was not read properly.
     raw_message_bits_read = 0
